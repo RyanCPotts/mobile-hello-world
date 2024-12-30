@@ -1,11 +1,24 @@
-import { React } from 'react-native';
+import { React, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default function App() {
+  // We can use state to store a message that shows up when the text is touched
+  const [message, setMessage] = useState('');
+
+  const handleTouch = () => {
+    setMessage("You touched the 'HELLO WORLD!' text!");
+  };
+
   return (
     <View style={styles.container}>
-      <Text>HELLO WORLD!</Text>
+      <TouchableOpacity onPress={handleTouch}>
+        <Text>HELLO WORLD!</Text>
+      </TouchableOpacity>
+
+      {/* Conditionally render the message when the text is touched */}
+      {message !== '' && <Text>{message}</Text>}
+
       <StatusBar style="auto" />
     </View>
   );
