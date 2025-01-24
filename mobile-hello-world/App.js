@@ -1,23 +1,37 @@
-import { React, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+// App.js
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, StatusBar } from 'react-native';
+import { Audio } from 'expo-av';
+import AudioHandler from './Components/AudioHandler.js';
 
 export default function App() {
-  // We can use state to store a message that shows up when the text is touched
-  const [message, setMessage] = useState('');
+  const [playSound, setPlaySound] = useState(false);
 
+  // Initialize audio settings
+  useEffect(() => {
+    async function setupAudio() {
+      await Audio.setAudioModeAsync({
+        playsInSilentModeIOS: true,
+        allowsRecordingIOS: false,
+        staysActiveInBackground: false,
+        shouldDuckAndroid: true,
+      });
+    }
+    setupAudio();
+  }, []);
+
+  // Handle touch on the "HELLO WORLD!" text
   const handleTouch = () => {
-    setMessage("You touched the 'HELLO WORLD!' text!");
+    setPlaySound(prev => !prev);  // Toggle sound state to allow multiple plays
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleTouch}>
-        <Text>HELLO WORLD!</Text>
-      </TouchableOpacity>
+      {/* Pass the handleTouch function to TouchHandler */}
+      <TouchHandler onPress={handleTouch} />
 
-      {/* Conditionally render the message when the text is touched */}
-      {message !== '' && <Text>{message}</Text>}
+      {/* Pass the playSound state to AudioHandler to play sound */}
+      <AudioHandler shouldPlay={playSound} />
 
       <StatusBar style="auto" />
     </View>
