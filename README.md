@@ -1,1 +1,1 @@
-# mobile-proof-of-life
+npx expo start
