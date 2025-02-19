@@ -4,13 +4,20 @@
     "slug": "mobile-hello-world",
     "version": "1.0.0",
     "orientation": "portrait",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "android": {
       "jsEngine": "hermes"
     },
     "ios": {
       "jsEngine": "hermes"
     },
-    "entryPoint": "./index.js"
+    "entryPoint": "./index.js",
+    "plugins": [
+      "expo-asset"
+    ]
   }
 }

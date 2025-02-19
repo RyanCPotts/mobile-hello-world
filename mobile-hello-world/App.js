@@ -1,8 +1,8 @@
-// App.js
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, StatusBar } from 'react-native';
 import { Audio } from 'expo-av';
 import AudioHandler from './Components/AudioHandler.js';
+import TouchHandler from './Components/TouchHandler.js'; // Add this import
 
 export default function App() {
   const [playSound, setPlaySound] = useState(false);
