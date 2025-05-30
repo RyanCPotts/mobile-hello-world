@@ -1,0 +1,92 @@
+{
+  "fixedbike": {
+    "information":{
+      "name":"Fixed Gear Bicycle",
+      "authors":"Ryan Potts",
+      "type":"vehicle",
+      "keywords":"bike, fixie, bicycle"
+    },
+
+    "slotType":"main",
+
+    "nodes":[
+      ["id", "posX", "posY", "posZ"],
+      {"frictionCoef": 0.8},
+      ["frame_front", 0.5, 0.0, 0.7],
+      ["frame_rear", -0.5, 0.0, 0.7],
+      ["seat", -0.3, 0.0, 1.0],
+      ["handlebar", 0.6, 0.0, 1.0],
+      ["pedal", -0.1, 0.0, 0.65]
+    ],
+
+    "beams":[
+      ["id1:", "id2:"],
+      ["frame_front", "frame_rear"],
+      ["frame_front", "handlebar"],
+      ["frame_rear", "seat"],
+      ["seat", "handlebar"],
+      ["frame_rear", "pedal"],
+      ["pedal", "frame_front"]
+    ],
+
+    "wheels":[
+      {
+        "name":"frontwheel",
+        "node1":"frame_front",
+        "radius":0.35,
+        "width":0.03,
+        "frictionCoef":1.5,
+        "hubRadius":0.03,
+        "hubWidth":0.03,
+        "torqueArm":"frame_rear",
+        "propulsed":false,
+        "steering":true,
+        "brakeTorque":50
+      },
+      {
+        "name":"rearwheel",
+        "node1":"frame_rear",
+        "radius":0.35,
+        "width":0.03,
+        "frictionCoef":1.5,
+        "hubRadius":0.03,
+        "hubWidth":0.03,
+        "torqueArm":"pedal",
+        "propulsed":true,
+        "steering":false,
+        "brakeTorque":0,
+        "drive":true
+      }
+    ],
+
+    "powertrain": [
+      ["type", "name", "inputName", "outputName"],
+      ["engine", "bike_engine", "mainInput", "pedal"],
+      ["gearbox", "fixie_gearbox", "pedal", "rearwheel"]
+    ],
+
+    "engines": {
+      "bike_engine": {
+        "torque":[
+          [0, 15],
+          [100, 18],
+          [500, 20]
+        ],
+        "maxRPM": 500,
+        "inertia": 0.01,
+        "friction": 1,
+        "brakingCoefRPS": 0.05
+      }
+    },
+
+    "gearboxes": {
+      "fixie_gearbox": {
+        "gears": [0, 1],
+        "gearRatios": [1, 1],
+        "shiftTime": 0,
+        "clutchDuration": 0,
+        "fixedGear": true
+      }
+    }
+  }
+}
