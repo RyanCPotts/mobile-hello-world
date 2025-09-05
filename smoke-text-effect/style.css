@@ -35,8 +35,8 @@ h1 {
 
 h1 span {
     display: inline-block;
-    animation: animate 1s linear infinite;
-
+    animation: animate 1s linear 1;
+    animation-fill-mode: forwards;
 }
 
 @keyframes animate {
@@ -65,6 +65,7 @@ h1 span:nth-child(4) {
     animation-delay: 3s;
 }
 h1 span:nth-child(5) {
+    color: #cc1515;
     animation-delay: 3.5s;
 }
 h1 span:nth-child(6) {
